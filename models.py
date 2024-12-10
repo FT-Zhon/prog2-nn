@@ -1,7 +1,6 @@
 import torch
 from torch import nn
 
-
 class MyModel(nn.Module):
     def __init__(self):
         super().__init__()
@@ -14,6 +13,7 @@ class MyModel(nn.Module):
             nn.ReLU(),
             nn.Linear(512, 10)
         )
+
 
     def forward(self, x):
         x = self.flatten(x)
@@ -66,5 +66,3 @@ def test(model, dataloader, loss_fn):
     
     # バッチ数で割って、平均値を返す
     return loss_total / len(dataloader)
-
-
