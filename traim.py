@@ -80,9 +80,11 @@ for k in range(n_epochs):
     loss_train_history.append(loss_train)
     print(f'train loss: {loss_train} ({time_end-time_start:.1f}s)', end=': ')
 
+    time_start = time.time()
     loss_test = models.test(model, dataloader_train, loss_fn)
+    time_end = time.time()
     loss_test_history.append(loss_test)
-    print(f'test loss: {acc_test*100:.3f}', end=': ')
+    print(f'test loss: {acc_test*100:.3f} ({time_end-time_start:.1f}s)', end=': ')
 
     # 精度を計算する
     acc_train = models.test_accuracy(model, dataloader_train)
