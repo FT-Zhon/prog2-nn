@@ -63,7 +63,9 @@ optimizer = torch.optim.SGD(model.parameters(), lr=learing_rate)
 # criterion（基準）とも呼ぶ
 
 # 精度を計算する
-acc_test = models.test_accuracy(model, dataloader_test)
+acc_train = models.test_accuracy(model, dataloader_test, device=device)
+print(f'test accuracy: {acc_train*100:.3f}%' )
+acc_test = models.test_accuracy(model, dataloader_test, device=device)
 print(f'test accuracy: {acc_test*100:.3f}%' )
 
 n_epochs = 20
@@ -93,13 +95,13 @@ for k in range(n_epochs):
         time_start = time.time()
         acc_train = models.test_accuracy(model, dataloader_train, device=device)
         time_end = time.time()
-        acc_train_history.append(loss_train, device=device)
+        acc_train_history.append(loss_train)
         print(f'    train accuracy: {acc_train*100:.3f}% ({time_end-time_start:.1f}s)' )
         
         time_start = time.time()
         acc_test = models.test_accuracy(model, dataloader_test, device=device)
         time_end = time.time()
-        acc_test_history.append(loss_train, device=device)
+        acc_test_history.append(loss_train)
         print(f'test accuracy: {acc_test*100:.3f}% ({time_end-time_start:.1f}s)')
 
 plt.plot(acc_train_history, label='train')
